@@ -4,6 +4,8 @@ import MainLayout from "./MainLayout";
 import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
+import PrivateRoute from "./PrivateRoute";
+import DashboardLayout from "./DashboardLayout";
 
 const myCreatedRoute =  createBrowserRouter([
     {
@@ -23,6 +25,18 @@ const myCreatedRoute =  createBrowserRouter([
             path: "register",
             element : <Register></Register>
             },
+        ]
+    },
+
+    {
+        path: '/dashboard',
+        element: (
+          <PrivateRoute>
+            <DashboardLayout></DashboardLayout>
+          </PrivateRoute>
+        ),
+        children: [
+
         ]
     }
 ])
