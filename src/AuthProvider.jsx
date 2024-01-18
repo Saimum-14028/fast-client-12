@@ -12,6 +12,53 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
     let result;
 
+    const [userCount, setUserCount] = useState();
+    const [bookedCount, setBookedCount] = useState();
+    const [deliveredCount, setDeliveredCount] = useState();
+    const [target, setTarget] = useState();
+
+    useEffect( () =>{
+        fetch(`http://localhost:5000/bookingdate`)
+        .then(res => res.json())
+        .then(data => {
+       //     console.log(data.length);
+            setTarget(data)
+          //  setLoading(false);
+        })
+    }, [])
+
+    useEffect( () =>{
+        fetch(`http://localhost:5000/userCount`)
+        .then(res => res.json())
+        .then(data => {
+       //     console.log(data.length);
+            setUserCount(data.length)
+          //  setLoading(false);
+        })
+    }, [])
+
+    useEffect( () =>{
+        fetch(`http://localhost:5000/parcelCount`)
+        .then(res => res.json())
+        .then(data => {
+       //     console.log(data.length);
+            setBookedCount(data.length)
+          //  setLoading(false);
+        })
+    }, [])
+
+    const status = "Delivered"
+
+    useEffect( () =>{
+        fetch(`http://localhost:5000/parcelCount?status=${status}`)
+        .then(res => res.json())
+        .then(data => {
+       //     console.log(data.length);
+            setDeliveredCount(data.length)
+          //  setLoading(false);
+        })
+    }, [])
+
     // create user 
     const createUser = (email, password) => {
         setLoading(true)
@@ -58,7 +105,11 @@ const AuthProvider = ({ children }) => {
         logOut,
         user,
         loading,
-        handleUpdateProfile
+        handleUpdateProfile,
+        userCount,
+        bookedCount,
+        deliveredCount,
+        target
     }
 
     return (
