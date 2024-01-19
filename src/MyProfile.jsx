@@ -6,6 +6,7 @@ import Loading from './Loading';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion"
 
 const image_key = import.meta.env.VITE_image_hosting_key;
 const image_api = `https://api.imgbb.com/1/upload?key=${image_key}`;
@@ -20,7 +21,7 @@ const MyProfile = () => {
         return <Loading></Loading>
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${user?.email}`)
+        fetch(`https://brainy-boa-shoulder-pads.cyclic.app/users/${user?.email}`)
             .then(res => res.json())
             .then(data => setCart(data))
     }, [user.email],);
@@ -41,7 +42,7 @@ const MyProfile = () => {
             toast.success('User Updated successfully');
         })
 
-        await fetch(`http://localhost:5000/users/${user?.email}`, {
+        await fetch(`https://brainy-boa-shoulder-pads.cyclic.app/users/${user?.email}`, {
             method: "PUT",
             //  mode: 'no-cors',
             headers: {
@@ -52,7 +53,7 @@ const MyProfile = () => {
             })
             .then((res) => res.json())
             .then((data) => {           
-                console.log(data);
+        //        console.log(data);
                 if(data.modifiedCount || data.upsertedCount){
                     swal(
                         'Updated!',

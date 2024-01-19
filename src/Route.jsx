@@ -21,6 +21,7 @@ import MyReviews from "./MyReviews";
 import UpdateParcel from "./UpdateParcel";
 import AllAdmins from "./AllAdmins";
 import Payment from "./Payment";
+import PaymentSuccess from "./PaymentSuccess";
 
 const myCreatedRoute =  createBrowserRouter([
     {
@@ -92,7 +93,7 @@ const myCreatedRoute =  createBrowserRouter([
               element : (
                 <PrivateRoute><UserRoute><UpdateParcel></UpdateParcel></UserRoute></PrivateRoute>
               ),
-              loader: ({params}) => fetch(`http://localhost:5000/parcels/${params.id}`),
+              loader: ({params}) => fetch(`https://brainy-boa-shoulder-pads.cyclic.app/parcels/${params.id}`),
             },
             {
                 path: 'my parcels',
@@ -101,9 +102,16 @@ const myCreatedRoute =  createBrowserRouter([
                 ),
             },
             {
-              path: 'payment',
+              path: 'payment/:id',
               element: (
                 <PrivateRoute><UserRoute><Payment></Payment></UserRoute></PrivateRoute>
+              ),
+              loader: ({params}) => fetch(`https://brainy-boa-shoulder-pads.cyclic.app/parcels/${params.id}`),
+            },
+            {
+              path: 'payment success',
+              element: (
+                <PrivateRoute><UserRoute><PaymentSuccess></PaymentSuccess></UserRoute></PrivateRoute>
               ),
             },
             {
